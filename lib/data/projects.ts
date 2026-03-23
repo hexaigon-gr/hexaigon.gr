@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a luxury florist in Ilioupoli",
     desktopImage: "/projects/moisis-flower-design-desktop.png",
     mobileImage: "/projects/moisis-flower-design-mobile.png",
-    url: "https://moisis-flower-design.vercel.app/en",
+    url: "https://www.moisis-flower-design.gr",
   },
   {
     slug: "1-percent-club",
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
     description: "Website for medical rehabilitation services",
     desktopImage: "/projects/iatriki-apokatastasi-desktop.png",
     mobileImage: "/projects/iatriki-apokatastasi-mobile.png",
-    url: "https://iatriki-apokatastasi.vercel.app/",
+    url: "https://www.iatriki-apokatastasi.gr",
   },
   {
     slug: "anthopolio-kaloudhs",
