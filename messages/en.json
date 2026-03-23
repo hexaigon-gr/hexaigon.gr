@@ -160,6 +160,10 @@
     "error": "Something went wrong. Please try again.",
     "emailFallback": "Or email us at"
   },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: March 23, 2026"
+  },
   "Footer": {
     "tagline": "AI-powered web development & automation",
     "services": "Services",

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import { Link } from "@/lib/i18n/navigation";
 import { SocialIcon } from "@/components/social-icon";
 import { TypographySmallReg } from "@/components/ui/typography";
 
@@ -120,9 +121,9 @@ export const Footer = async () => {
             &copy; 2026 hexAIgon. {t("rights")}
           </TypographySmallReg>
           <div className="flex gap-4">
-            <a href="#" className={LEGAL_LINK_CLASS}>
+            <Link href="/privacy-policy" className={LEGAL_LINK_CLASS}>
               {t("privacy")}
-            </a>
+            </Link>
             <a href="#" className={LEGAL_LINK_CLASS}>
               {t("terms")}
             </a>
