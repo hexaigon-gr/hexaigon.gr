@@ -19,7 +19,8 @@
     "rotating3": "software that thinks.",
     "subtitle": "AI-powered web development & automation for businesses across Greece.",
     "cta": "Get Started",
-    "ctaSecondary": "Portfolio"
+    "ctaSecondary": "Portfolio",
+    "eyebrow": "AI-powered web studio — Greece"
   },
   "Services": {
     "title": "What We Do",
@@ -46,7 +47,9 @@
     "customSoftware": {
       "title": "Custom Software",
       "description": "Tailored software solutions for your unique business needs. From internal tools to customer-facing platforms."
-    }
+    },
+    "eyebrow": "Services",
+    "description": "Six ways we help your business ship faster — from marketing sites to custom AI systems."
   },
   "WhyUs": {
     "title": "Why Us",
@@ -113,11 +116,15 @@
     "pricing": {
       "title": "Transparent pricing, no surprises",
       "description": "Clear packages, no hidden fees. You know from the start what you pay and what you get."
-    }
+    },
+    "eyebrow": "Why us",
+    "description": "Every build ships with the details that make the difference — speed, SEO, security, and support come as standard.",
+    "cta": "Start your project"
   },
   "Payments": {
     "title": "Online Payments with the Lowest Fees",
-    "description": "Accept payments via Stripe with the lowest fees in Greece. Auto-connected with AADE myDATA — invoices sent automatically, zero hassle."
+    "description": "Accept payments via Stripe with the lowest fees in Greece. Auto-connected with AADE myDATA — invoices sent automatically, zero hassle.",
+    "eyebrow": "Payments"
   },
   "HowWeWork": {
     "title": "How We Work",
@@ -132,7 +139,9 @@
     "step3": {
       "title": "Launch",
       "description": "We deploy, test, and hand over with ongoing support to ensure your success."
-    }
+    },
+    "eyebrow": "Process",
+    "description": "Three steps from first call to launch — nothing unnecessary in between."
   },
   "Stats": {
     "projects": "Projects Delivered",
@@ -145,7 +154,9 @@
     "viewAll": "View All Projects",
     "viewMore": "View {count} more",
     "visit": "Visit Site",
-    "allProjectsTitle": "All Projects"
+    "allProjectsTitle": "All Projects",
+    "eyebrow": "Selected work",
+    "description": "Real projects for real businesses across Greece — live and in production."
   },
   "TechStack": {
     "title": "Powered By"
@@ -159,7 +170,9 @@
     "submit": "Send Message",
     "success": "Message sent! We'll be in touch soon.",
     "error": "Something went wrong. Please try again.",
-    "emailFallback": "Or email us at"
+    "emailFallback": "Or email us at",
+    "eyebrow": "Contact",
+    "responseNote": "Response within 24 hours"
   },
   "PrivacyPolicy": {
     "title": "Privacy Policy",

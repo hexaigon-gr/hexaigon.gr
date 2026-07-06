@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useCallback } from "react";
 import { toPng } from "html-to-image";
 import { QRCodeSVG } from "qrcode.react";
+import { useCallback,useRef } from "react";
 
 const SERVICES = [
   "Websites",

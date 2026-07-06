@@ -1,39 +1,44 @@
 import { getTranslations } from "next-intl/server";
 
-import { TypographyH2 } from "@/components/ui/typography";
-import { cn } from "@/lib/general/utils";
-
 const TECH_STACK = [
-  { name: "React", color: "hover:text-cyan-400 hover:border-cyan-400/30" },
-  { name: "Next.js", color: "hover:text-white hover:border-white/30" },
-  { name: "TypeScript", color: "hover:text-blue-400 hover:border-blue-400/30" },
-  { name: "OpenAI", color: "hover:text-green-400 hover:border-green-400/30" },
-  { name: "Anthropic", color: "hover:text-orange-400 hover:border-orange-400/30" },
-  { name: "Stripe", color: "hover:text-purple-400 hover:border-purple-400/30" },
-  { name: "Supabase", color: "hover:text-emerald-400 hover:border-emerald-400/30" },
-  { name: "Tailwind CSS", color: "hover:text-sky-400 hover:border-sky-400/30" },
+  "React",
+  "Next.js",
+  "TypeScript",
+  "OpenAI",
+  "Anthropic",
+  "Stripe",
+  "Supabase",
+  "Tailwind CSS",
 ] as const;
 
 export const TechStackSection = async () => {
   const t = await getTranslations("TechStack");
 
   return (
-    <section id="tech-stack" className="py-24 px-4">
-      <div className="container mx-auto max-w-4xl">
-        <TypographyH2 className="text-center mb-16">{t("title")}</TypographyH2>
+    <section id="tech-stack" className="py-16">
+      <div className="border-y border-white/10 py-10 sm:py-12">
+        <p className="eyebrow text-center mb-8">{t("title")}</p>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          {TECH_STACK.map(({ name, color }) => (
-            <div
-              key={name}
-              className={cn(
-                "px-6 py-3 rounded-full border border-white/10 text-muted-foreground text-sm font-medium transition-all duration-300",
-                color
-              )}
-            >
-              {name}
-            </div>
-          ))}
+        {/* Infinite marquee — duplicate list for a seamless loop */}
+        <div
+          className="marquee overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+          aria-label={TECH_STACK.join(", ")}
+        >
+          <div className="marquee-track flex w-max items-center">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex items-center" aria-hidden={copy === 1}>
+                {TECH_STACK.map((name) => (
+                  <span
+                    key={name}
+                    className="flex items-center font-mono text-xl sm:text-2xl uppercase tracking-widest text-muted-foreground/80 hover:text-foreground transition-colors duration-300 whitespace-nowrap"
+                  >
+                    <span className="px-8 sm:px-10">{name}</span>
+                    <span aria-hidden className="text-primary/40 text-sm">+</span>
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

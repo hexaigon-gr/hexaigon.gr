@@ -1,139 +1,62 @@
-"use client";
-
-import { Globe } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { type Project } from "@/lib/data/projects";
-
-interface PhoneFrameProps {
-  src: string;
-  alt: string;
-  onPreview: () => void;
-}
-
-const PhoneFrame = ({ src, alt, onPreview }: PhoneFrameProps) => (
-  <button
-    onClick={onPreview}
-    className="relative w-full rounded-xl border-[3px] border-neutral-700 bg-neutral-800 overflow-hidden aspect-9/19 shadow-2xl cursor-pointer active:scale-95 transition-transform duration-200"
-  >
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[6%] bg-neutral-800 rounded-b-lg z-10" />
-    <Image src={src} alt={alt} fill className="object-cover object-top" />
-  </button>
-);
+import { cn } from "@/lib/general/utils";
 
 interface ProjectCardProps {
   project: Project;
+  index: number;
+  /** Featured cards span both grid columns on large screens */
+  featured?: boolean;
 }
 
-export const ProjectCard = ({ project }: ProjectCardProps) => {
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
-  const isMobileOnly = !project.desktopImage;
+export const ProjectCard = ({ project, index, featured = false }: ProjectCardProps) => {
+  const cover = project.mockupImage ?? project.desktopImage ?? project.mobileImage;
 
   return (
-    <>
-      <div className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/25 transition-all duration-500 hover:shadow-[0_0_40px_rgba(100,140,255,0.08)]">
-        {/* Device mockups */}
-        <div className="relative px-8 pt-10 pb-6">
-          {/* Colored glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[80px] group-hover:bg-blue-500/20 transition-all duration-700" />
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        "group relative block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] hover:border-white/30 transition-colors duration-500",
+        featured && "lg:col-span-2"
+      )}
+    >
+      <div className="relative aspect-video overflow-hidden">
+        <Image
+          src={cover}
+          alt={project.title}
+          fill
+          sizes={
+            featured
+              ? "(min-width: 1280px) 1152px, 100vw"
+              : "(min-width: 1024px) 566px, 100vw"
+          }
+          className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+        />
+        {/* Legibility gradient for the info bar */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 via-40% to-transparent" />
 
-          {isMobileOnly ? (
-            /* Mobile-only layout: centered phone */
-            <div className="relative flex justify-center">
-              <div className="relative w-[30%] group-hover:scale-[1.03] transition-transform duration-500">
-                <PhoneFrame
-                  src={project.mobileImage}
-                  alt={`${project.title} - mobile`}
-                  onPreview={() => setPreviewImage(project.mobileImage)}
-                />
-              </div>
-            </div>
-          ) : (
-            /* Desktop + mobile layout */
-            <div className="relative flex items-end justify-center group-hover:scale-[1.02] transition-transform duration-500">
-              {/* Laptop frame */}
-              <div className="relative w-[78%]">
-                <button
-                  onClick={() => setPreviewImage(project.desktopImage!)}
-                  className="relative w-full rounded-t-lg border-[3px] border-b-0 border-neutral-700 bg-neutral-800 overflow-hidden aspect-16/10 cursor-pointer active:scale-95 transition-transform duration-200"
-                >
-                  <Image
-                    src={project.desktopImage!}
-                    alt={`${project.title} - desktop`}
-                    fill
-                    className="object-cover object-top"
-                  />
-                </button>
-                <div className="relative h-3 bg-neutral-700 rounded-b-lg">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-1 bg-neutral-600 rounded-b-sm" />
-                </div>
-              </div>
-
-              {/* Phone frame - overlaid right */}
-              <div className="relative -ml-[14%] mb-1 w-[20%] z-10">
-                <PhoneFrame
-                  src={project.mobileImage}
-                  alt={`${project.title} - mobile`}
-                  onPreview={() => setPreviewImage(project.mobileImage)}
-                />
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Info */}
-        <div className="px-8 pb-6 pt-2 flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-semibold tracking-tight">{project.title}</h3>
-            <p className="text-sm text-muted-foreground mt-0.5">{project.description}</p>
-          </div>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={project.url}
-            className="shrink-0 p-2.5 rounded-xl text-muted-foreground hover:text-blue-400 hover:bg-white/5 transition-all duration-300"
-          >
-            <Globe className="h-5 w-5" />
-          </a>
-        </div>
+        <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.2em] text-white/70 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
 
-      <Dialog open={!!previewImage} onOpenChange={() => setPreviewImage(null)}>
-        <DialogContent
-          showCloseButton={false}
-          className="bg-neutral-950! p-0! gap-0! max-w-6xl w-[95vw] border-neutral-800 rounded-2xl overflow-hidden"
-        >
-          <DialogTitle className="sr-only">{project.title}</DialogTitle>
-
-          {/* Custom close button */}
-          <button
-            onClick={() => setPreviewImage(null)}
-            className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white hover:bg-black/80 hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-
-          {previewImage && (
-            <Image
-              src={previewImage}
-              alt={project.title}
-              width={1920}
-              height={1080}
-              className="w-full h-auto"
-            />
-          )}
-        </DialogContent>
-      </Dialog>
-    </>
+      <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 flex items-end justify-between gap-4">
+        <div className="min-w-0">
+          <h3 className={cn("font-semibold tracking-tight text-white", featured ? "text-xl sm:text-2xl" : "text-lg")}>
+            {project.title}
+          </h3>
+          <p className="text-sm text-white/60 mt-0.5 truncate">
+            {project.description}
+          </p>
+        </div>
+        <span className="shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/20 bg-black/30 backdrop-blur-sm text-white/80 group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground group-hover:rotate-45 transition-all duration-300">
+          <ArrowUpRight className="h-4 w-4" />
+        </span>
+      </div>
+    </a>
   );
 };

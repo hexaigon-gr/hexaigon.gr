@@ -3,13 +3,13 @@
 import { Globe } from "lucide-react";
 import { useLocale } from "next-intl";
 
-import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname, useRouter } from "@/lib/i18n/navigation";
 
 const languages = [
   { code: "en", name: "English", flag: "🇬🇧" },

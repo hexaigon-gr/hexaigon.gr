@@ -97,6 +97,19 @@ Always use typography components from `@/components/ui/typography.tsx`:
   }
   ```
 
+## Mockup Pipeline (scripts/mockup)
+
+- **Composite by green MASK, not bounding rect** - Filling the detected screen
+  rectangle overpaints device details that intrude into it (iPhone Dynamic
+  Island, MacBook notch, rounded corners) and looks fake. Alpha must be the
+  actual green pixels (dilated a few px over the anti-aliased fringe) so
+  non-green pixels inside the rect keep the original scene.
+- **Detect quads on a strict eroded mask** - Green reflections (keyboard glow,
+  glossy bezels, desk) pass a permissive gate and skew `minAreaRect`. Detection
+  needs higher S/V thresholds + erosion; compositing keeps the permissive mask.
+- **Zoom into device close-ups when verifying composites** - Full-frame checks
+  miss bezel/camera-level defects the user will notice immediately.
+
 ## Workflow
 
 - **Error Checking Protocol** - After completing work on any file: (1) Run `pnpm tsc --noEmit`, (2) Run `pnpm lint`, (3) Fix ALL errors before moving on.

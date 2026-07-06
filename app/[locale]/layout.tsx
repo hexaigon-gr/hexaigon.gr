@@ -1,20 +1,26 @@
-import type { Metadata } from "next";
-import { hasLocale } from "next-intl";
-import { notFound } from "next/navigation";
-import { setRequestLocale, getMessages } from "next-intl/server";
-import Script from "next/script";
-import { Roboto } from "next/font/google";
-import { routing } from "@/lib/i18n/routing";
-import { Providers } from "@/components/providers";
-import { BaseLayoutProps } from "@/types/page-props";
 import "./globals.css";
+
+import type { Metadata } from "next";
+import { Commissioner, JetBrains_Mono } from "next/font/google";
+import { notFound } from "next/navigation";
+import Script from "next/script";
+import { hasLocale } from "next-intl";
+import { getMessages,setRequestLocale } from "next-intl/server";
+
+import { Providers } from "@/components/providers";
+import { routing } from "@/lib/i18n/routing";
+import { BaseLayoutProps } from "@/types/page-props";
 
 const META_PIXEL_ID = "1961881335206282";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+const commissioner = Commissioner({
+  variable: "--font-commissioner",
+  subsets: ["latin", "greek"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin", "greek"],
 });
 
 const SITE_URL =
@@ -116,7 +122,9 @@ const LocaleLayout = async ({ children, params }: BaseLayoutProps) => {
           />
         </noscript>
       </head>
-      <body className={`${roboto.variable} font-sans antialiased`}>
+      <body
+        className={`${commissioner.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+      >
         <Script
           id="meta-pixel"
           strategy="afterInteractive"

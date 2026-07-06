@@ -1,10 +1,10 @@
 import fs from "fs/promises";
-import path from "path";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import path from "path";
 import Markdown from "react-markdown";
 
-import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import { BasePageProps } from "@/types/page-props";
 
 export async function generateMetadata({ params }: BasePageProps) {

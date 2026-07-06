@@ -1,13 +1,13 @@
 import { Hammer, Rocket, Search } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import { TypographyH2 } from "@/components/ui/typography";
-import { cn } from "@/lib/general/utils";
+import { Reveal } from "@/components/reveal";
+import { SectionHeader } from "@/components/section-header";
 
 const STEPS = [
-  { key: "step1", icon: Search, number: "01", color: "text-blue-400" },
-  { key: "step2", icon: Hammer, number: "02", color: "text-purple-400" },
-  { key: "step3", icon: Rocket, number: "03", color: "text-green-400" },
+  { key: "step1", icon: Search, number: "01" },
+  { key: "step2", icon: Hammer, number: "02" },
+  { key: "step3", icon: Rocket, number: "03" },
 ] as const;
 
 export const HowWeWorkSection = async () => {
@@ -16,28 +16,40 @@ export const HowWeWorkSection = async () => {
   return (
     <section id="how-we-work" className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
-        <TypographyH2 className="text-center mb-16">{t("title")}</TypographyH2>
+        <Reveal>
+          <SectionHeader
+            index="04"
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            description={t("description")}
+          />
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connecting line (desktop) */}
-          <div className="hidden md:block absolute top-6 left-[16.67%] right-[16.67%] h-px bg-linear-to-r from-blue-500/50 via-purple-500/50 to-green-500/50" />
-
-          {STEPS.map(({ key, icon: Icon, number, color }) => (
-            <div key={key} className="relative text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white font-bold text-sm mb-6 relative z-10">
-                {number}
-              </div>
-
-              <div className="glass p-6">
-                <Icon className={cn("h-8 w-8 mx-auto mb-4", color)} />
-                <h3 className="text-lg font-semibold mb-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          {STEPS.map(({ key, icon: Icon, number }, i) => (
+            <Reveal key={key} delay={i * 120}>
+              <div className="group relative border-t border-white/10 pt-8 hover:border-primary/60 transition-colors duration-500">
+                {/* Plus mark riding the hairline */}
+                <span
+                  aria-hidden
+                  className="absolute -top-[9px] left-0 font-mono text-xs text-white/30 group-hover:text-primary transition-colors duration-500 bg-background pr-2"
+                >
+                  +
+                </span>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-mono text-5xl font-bold gradient-text opacity-90">
+                    {number}
+                  </span>
+                  <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors duration-500" />
+                </div>
+                <h3 className="text-xl font-semibold tracking-tight mb-2">
                   {t(`${key}.title`)}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {t(`${key}.description`)}
                 </p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -14,9 +14,8 @@ import {
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import { Link } from "@/lib/i18n/navigation";
 import { SocialIcon } from "@/components/social-icon";
-import { TypographySmallReg } from "@/components/ui/typography";
+import { Link } from "@/lib/i18n/navigation";
 
 const SERVICE_LINKS = [
   { key: "websites", icon: Globe },
@@ -55,22 +54,22 @@ export const Footer = async () => {
   const t = await getTranslations("Footer");
 
   return (
-    <footer className="border-t border-white/10 py-12 px-4">
+    <footer className="relative border-t border-white/10 pt-16 px-4 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-2">
-              <Hexagon className="h-5 w-5 text-blue-500" />
-              <p className="text-xl font-bold">
-                hex<span className="text-blue-500">AI</span>gon
+            <div className="flex items-center gap-2 mb-3">
+              <Hexagon className="h-5 w-5 text-primary" />
+              <p className="text-xl font-bold tracking-tight">
+                hex<span className="text-primary">AI</span>gon
               </p>
             </div>
-            <TypographySmallReg className="text-muted-foreground">
+            <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
               {t("tagline")}
-            </TypographySmallReg>
+            </p>
 
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-3 mt-6">
               {SOCIAL_LINKS.map(({ url, icon, color }) => (
                 <SocialIcon
                   key={color}
@@ -85,7 +84,7 @@ export const Footer = async () => {
 
           {/* Services */}
           <div>
-            <p className="font-semibold mb-4">{t("services")}</p>
+            <p className="eyebrow mb-5">{t("services")}</p>
             <div className="space-y-3">
               {SERVICE_LINKS.map(({ key, icon: Icon }) => (
                 <a key={key} href="#services" className={LINK_CLASS}>
@@ -98,7 +97,7 @@ export const Footer = async () => {
 
           {/* Company */}
           <div>
-            <p className="font-semibold mb-4">{t("company")}</p>
+            <p className="eyebrow mb-5">{t("company")}</p>
             <div className="space-y-3">
               <a href="#contact" className={LINK_CLASS}>
                 <Mail className="h-3.5 w-3.5" />
@@ -115,11 +114,11 @@ export const Footer = async () => {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <TypographySmallReg className="text-muted-foreground">
+        {/* Bottom bar */}
+        <div className="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 pb-8">
+          <p className="text-sm text-muted-foreground">
             &copy; 2026 hexAIgon. {t("rights")}
-          </TypographySmallReg>
+          </p>
           <div className="flex gap-4">
             <Link href="/privacy-policy" className={LEGAL_LINK_CLASS}>
               {t("privacy")}
@@ -129,6 +128,14 @@ export const Footer = async () => {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Ghost wordmark finale */}
+      <div
+        aria-hidden
+        className="pointer-events-none select-none text-center font-bold tracking-tighter leading-[0.75] text-[clamp(4rem,17vw,16rem)] bg-linear-to-b from-white/6 to-white/0 bg-clip-text text-transparent -mb-[0.12em]"
+      >
+        HEXAIGON
       </div>
     </footer>
   );

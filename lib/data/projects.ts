@@ -4,16 +4,28 @@ export type Project = {
   description: string;
   desktopImage?: string;
   mobileImage: string;
+  /** Composited device-mockup shot (scripts/mockup/composite.py) */
+  mockupImage?: string;
   url: string;
 };
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "orderoo",
+    title: "Orderoo",
+    description: "Direct ordering platform for local shops, 0% commission",
+    desktopImage: "/projects/orderoo-desktop.png",
+    mobileImage: "/projects/orderoo-mobile.png",
+    mockupImage: "/projects/orderoo-mockup.png",
+    url: "https://orderoo.gr",
+  },
   {
     slug: "kratisix",
     title: "Kratisix",
     description: "Platform for online appointment booking",
     desktopImage: "/projects/kratisix-desktop.png",
     mobileImage: "/projects/kratisix-mobile.png",
+    mockupImage: "/projects/kratisix-mockup.png",
     url: "https://www.kratisix.com/en",
   },
   {
@@ -22,6 +34,7 @@ export const PROJECTS: Project[] = [
     description: "Website for salsa and bachata classes",
     desktopImage: "/projects/salsa-rayo-desktop.png",
     mobileImage: "/projects/salsa-rayo-mobile.png",
+    mockupImage: "/projects/salsa-rayo-mockup.png",
     url: "https://salsarayo.com/",
   },
   {
@@ -30,6 +43,7 @@ export const PROJECTS: Project[] = [
     description: "Website for luxury transfers in Greece",
     desktopImage: "/projects/poseidon-transfers-desktop.png",
     mobileImage: "/projects/poseidon-transfers-mobile.png",
+    mockupImage: "/projects/poseidon-transfers-mockup.png",
     url: "https://poseidontranfer.vercel.app/en-US",
   },
   {
@@ -38,6 +52,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a luxury florist in Ilioupoli",
     desktopImage: "/projects/moisis-flower-design-desktop.png",
     mobileImage: "/projects/moisis-flower-design-mobile.png",
+    mockupImage: "/projects/moisis-flower-design-mockup.png",
     url: "https://www.moisis-flower-design.gr",
   },
   {
@@ -46,6 +61,7 @@ export const PROJECTS: Project[] = [
     description: "Game for progressive difficulty trivia",
     desktopImage: "/projects/1-percent-club-desktop.png",
     mobileImage: "/projects/1-percent-club-mobile.png",
+    mockupImage: "/projects/1-percent-club-mockup.png",
     url: "https://1-percent-club-six.vercel.app/en",
   },
   {
@@ -54,7 +70,8 @@ export const PROJECTS: Project[] = [
     description: "Website for an award-winning nail care salon",
     desktopImage: "/projects/4yournails-desktop.png",
     mobileImage: "/projects/4yournails-mobile.png",
-    url: "https://4yournails.vercel.app/el",
+    mockupImage: "/projects/4yournails-mockup.png",
+    url: "https://www.4yournails.gr",
   },
   {
     slug: "wheel-way",
@@ -62,7 +79,8 @@ export const PROJECTS: Project[] = [
     description: "Website for a driving school",
     desktopImage: "/projects/wheel-way-desktop.png",
     mobileImage: "/projects/wheel-way-mobile.png",
-    url: "https://wheel-way.vercel.app/",
+    mockupImage: "/projects/wheel-way-mockup.png",
+    url: "https://wheel-way.gr",
   },
   {
     slug: "viliotis-ilias-accountant",
@@ -70,6 +88,7 @@ export const PROJECTS: Project[] = [
     description: "Website for an accounting and tax services firm",
     desktopImage: "/projects/viliotis-ilias-accountant-desktop.png",
     mobileImage: "/projects/viliotis-ilias-accountant-mobile.png",
+    mockupImage: "/projects/viliotis-ilias-accountant-mockup.png",
     url: "https://viliotis-ilias-accountant.vercel.app/",
   },
   {
@@ -78,6 +97,7 @@ export const PROJECTS: Project[] = [
     description: "Website for medical rehabilitation services",
     desktopImage: "/projects/iatriki-apokatastasi-desktop.png",
     mobileImage: "/projects/iatriki-apokatastasi-mobile.png",
+    mockupImage: "/projects/iatriki-apokatastasi-mockup.png",
     url: "https://www.iatriki-apokatastasi.gr",
   },
   {
@@ -86,6 +106,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a flower shop and garden services",
     desktopImage: "/projects/anthopolio-kaloudhs-desktop.png",
     mobileImage: "/projects/anthopolio-kaloudhs-mobile.png",
+    mockupImage: "/projects/anthopolio-kaloudhs-mockup.png",
     url: "https://www.anthopoleio-kaloudis.gr/en",
   },
   {
@@ -94,6 +115,7 @@ export const PROJECTS: Project[] = [
     description: "Website for holistic Chinese medicine therapies",
     desktopImage: "/projects/iching-balance-desktop.png",
     mobileImage: "/projects/iching-balance-mobile.png",
+    mockupImage: "/projects/iching-balance-mockup.png",
     url: "https://i-ching-v2.vercel.app/",
   },
   {
@@ -102,15 +124,8 @@ export const PROJECTS: Project[] = [
     description: "Website for a Greek fig cafe",
     desktopImage: "/projects/figata-desktop.png",
     mobileImage: "/projects/figata-mobile.png",
+    mockupImage: "/projects/figata-mockup.png",
     url: "https://www.figata.gr/en",
-  },
-  {
-    slug: "odontiatros-kiamos",
-    title: "Odontiatros Giannis Kiamos",
-    description: "Website for a dental surgery practice",
-    desktopImage: "/projects/odontiatros-kiamos-desktop.png",
-    mobileImage: "/projects/odontiatros-kiamos-mobile.png",
-    url: "https://odontiatros-giannis-kiamos.vercel.app/",
   },
   {
     slug: "epityxein",
@@ -118,6 +133,63 @@ export const PROJECTS: Project[] = [
     description: "Website for a tutoring center in Ilioupoli",
     desktopImage: "/projects/epityxein-desktop.png",
     mobileImage: "/projects/epityxein-mobile.png",
+    mockupImage: "/projects/epityxein-mockup.png",
     url: "https://epityxein.vercel.app",
+  },
+  {
+    slug: "shuk-athens",
+    title: "Shuk Athens",
+    description: "Website for a Levantine restaurant in central Athens",
+    desktopImage: "/projects/shuk-athens-desktop.png",
+    mobileImage: "/projects/shuk-athens-mobile.png",
+    url: "https://www.shukathens.com",
+  },
+  {
+    slug: "stone-massage-athens",
+    title: "Stone Massage Athens",
+    description: "Website for a boutique massage and wellness spa",
+    desktopImage: "/projects/stone-massage-athens-desktop.png",
+    mobileImage: "/projects/stone-massage-athens-mobile.png",
+    url: "https://stonemassageathens.com",
+  },
+  {
+    slug: "konstantinopoulou-kyparissia",
+    title: "Kyparissia Konstantinopoulou",
+    description: "Website for a psychologist and systemic therapist",
+    desktopImage: "/projects/konstantinopoulou-kyparissia-desktop.png",
+    mobileImage: "/projects/konstantinopoulou-kyparissia-mobile.png",
+    url: "https://konstantinopoulou-kyparissia.vercel.app/en",
+  },
+  {
+    slug: "antoniadis-autoservice",
+    title: "Antoniadis Auto Service",
+    description: "Website for a car service and repair garage",
+    desktopImage: "/projects/antoniadis-autoservice-desktop.png",
+    mobileImage: "/projects/antoniadis-autoservice-mobile.png",
+    url: "https://www.antoniadis-autoservice.gr",
+  },
+  {
+    slug: "vous-kreopoleio",
+    title: "Vous",
+    description: "Website for a butcher shop in Ilioupoli",
+    desktopImage: "/projects/vous-kreopoleio-desktop.png",
+    mobileImage: "/projects/vous-kreopoleio-mobile.png",
+    url: "https://vous-kreopoleio.vercel.app",
+  },
+  {
+    slug: "sifnios-ixthiopolio",
+    title: "O Sifnios",
+    description: "Website for a fish market and grill",
+    desktopImage: "/projects/sifnios-ixthiopolio-desktop.png",
+    mobileImage: "/projects/sifnios-ixthiopolio-mobile.png",
+    url: "https://sifnios-ixthiopolio.vercel.app",
+  },
+  {
+    slug: "moiss-defense-systems",
+    title: "MOISS Defense Systems",
+    description: "Website for a defense procurement and consulting firm",
+    desktopImage: "/projects/moiss-defense-systems-desktop.png",
+    mobileImage: "/projects/moiss-defense-systems-mobile.png",
+    url: "https://moiss-defense-systems.vercel.app",
   },
 ];

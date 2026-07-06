@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 
 import { LanguageSwitcher } from "@/components/examples/language-switcher";
-import { Link, usePathname, useRouter } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/general/utils";
+import { Link, usePathname, useRouter } from "@/lib/i18n/navigation";
 
 const NAV_LINKS = ["services", "ourWork", "whyUs", "howWeWork", "techStack", "contact"] as const;
 
@@ -79,9 +79,9 @@ export const Navbar = () => {
           }}
           className="flex items-center gap-2 cursor-pointer group"
         >
-          <Hexagon className="h-5 w-5 text-blue-500 group-hover:rotate-90 transition-transform duration-500" />
+          <Hexagon className="h-5 w-5 text-primary group-hover:rotate-90 transition-transform duration-500" />
           <span className="text-lg font-bold tracking-tight">
-            hex<span className="text-blue-500">AI</span>gon
+            hex<span className="text-primary">AI</span>gon
           </span>
         </Link>
 
@@ -103,7 +103,7 @@ export const Navbar = () => {
           <LanguageSwitcher />
           <button
             onClick={() => navigateToSection("contact")}
-            className="flex items-center gap-2 px-5 py-2 text-sm font-medium rounded-full border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 hover:border-blue-400/70 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full bg-primary text-primary-foreground shadow-[0_0_24px_-8px] shadow-primary/60 hover:shadow-[0_0_32px_-6px] hover:shadow-primary/70 hover:brightness-110 transition-all duration-300 cursor-pointer"
           >
             <CalendarDays className="h-4 w-4" />
             {t("getStarted")}
@@ -144,7 +144,7 @@ export const Navbar = () => {
             <LanguageSwitcher />
             <button
               onClick={() => navigateToSection("contact")}
-              className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 transition-all cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full bg-primary text-primary-foreground transition-all cursor-pointer"
             >
               <CalendarDays className="h-4 w-4" />
               {t("getStarted")}

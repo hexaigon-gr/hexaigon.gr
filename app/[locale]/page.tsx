@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ContactSection } from "@/components/contact-section";
-import { ScrollToTop } from "@/components/scroll-to-top";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { HowWeWorkSection } from "@/components/how-we-work-section";
 import { Navbar } from "@/components/navbar";
 import { PaymentsBanner } from "@/components/payments-banner";
 import { PortfolioSection } from "@/components/portfolio-section";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { ServicesSection } from "@/components/services-section";
-import { StatsSection } from "@/components/stats-section";
 import { TechStackSection } from "@/components/tech-stack-section";
 import { WhyUsSection } from "@/components/why-us-section";
 import { BasePageProps } from "@/types/page-props";
@@ -108,7 +107,6 @@ const Home = async ({ params }: BasePageProps) => {
         <WhyUsSection />
         <PortfolioSection />
         <HowWeWorkSection />
-        <StatsSection />
         <TechStackSection />
         <ContactSection />
       </main>

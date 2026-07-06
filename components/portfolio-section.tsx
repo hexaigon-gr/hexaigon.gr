@@ -1,41 +1,54 @@
-import { getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { TypographyH2 } from "@/components/ui/typography";
+import { getTranslations } from "next-intl/server";
+
 import { ProjectCard } from "@/components/project-card";
+import { Reveal } from "@/components/reveal";
+import { SectionHeader } from "@/components/section-header";
 import { PROJECTS } from "@/lib/data/projects";
 import { Link } from "@/lib/i18n/navigation";
 
-const FEATURED_COUNT = 8;
+const FEATURED_COUNT = 7;
 
 export const PortfolioSection = async () => {
   const t = await getTranslations("Portfolio");
-  const featured = PROJECTS.slice(0, FEATURED_COUNT);
-  const remaining = PROJECTS.length - FEATURED_COUNT;
+  const withMockups = PROJECTS.filter((p) => p.mockupImage);
+  const featured = withMockups.slice(0, FEATURED_COUNT);
+  const remaining = withMockups.length - featured.length;
 
   return (
     <section id="portfolio" className="py-24 px-4">
-      <div className="container mx-auto max-w-7xl">
-        <TypographyH2 className="text-center mb-16">{t("title")}</TypographyH2>
+      <div className="container mx-auto max-w-6xl">
+        <Reveal>
+          <SectionHeader
+            index="03"
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            description={t("description")}
+          />
+        </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {featured.map((project) => (
-            <ProjectCard
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {featured.map((project, i) => (
+            <Reveal
               key={project.slug}
-              project={project}
-            />
+              delay={(i % 2) * 100}
+              className={i === 0 ? "lg:col-span-2" : undefined}
+            >
+              <ProjectCard project={project} index={i} featured={i === 0} />
+            </Reveal>
           ))}
         </div>
 
         {remaining > 0 && (
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" asChild className="gap-2">
-              <Link href="/projects">
-                {t("viewMore", { count: remaining })}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          <Reveal className="text-center mt-12">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-3 h-12 px-8 rounded-full border border-white/15 text-sm font-medium hover:bg-white/5 hover:border-white/30 transition-all duration-300"
+            >
+              {t("viewMore", { count: remaining })}
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </Reveal>
         )}
       </div>
     </section>
