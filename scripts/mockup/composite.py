@@ -73,9 +73,30 @@ def find_green_quads(scene):
             f"Expected 2 green screens, found {len(contours)}. "
             "Check the scene has two clean pure-green screens with no glare."
         )
-    # minAreaRect is robust to rounded corners, notches, and slight device tilt.
-    quads = [cv2.boxPoints(cv2.minAreaRect(c)).astype(np.float32) for c in contours]
+    # true_quad captures the real perspective TRAPEZOID (a tilted phone leaning on a
+    # stand keystones — top/bottom edges differ). minAreaRect would flatten that to
+    # an upright rectangle, so the warped screenshot sits stiff/vertical instead of
+    # following the device's lean.
+    quads = [true_quad(c) for c in contours]
     return [expand_quad(order_quad(q), ERODE_PX) for q in quads]
+
+
+def true_quad(contour):
+    """The 4 real corners of a (possibly perspective-skewed) screen blob.
+
+    For each minAreaRect corner direction, take the contour point that reaches
+    furthest that way — the actual trapezoid corner. Handles keystone/tilt that
+    minAreaRect discards, and is robust to rounded corners and notches.
+    """
+    pts = contour.reshape(-1, 2).astype(np.float32)
+    center = pts.mean(axis=0)
+    box = cv2.boxPoints(cv2.minAreaRect(contour))
+    corners = []
+    for bx in box:
+        direction = bx - center
+        direction /= np.linalg.norm(direction) + 1e-6
+        corners.append(pts[int(np.argmax((pts - center) @ direction))])
+    return np.array(corners, dtype=np.float32)
 
 
 def order_quad(pts):
