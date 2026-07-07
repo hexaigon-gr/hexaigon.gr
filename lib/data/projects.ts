@@ -142,6 +142,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a Levantine restaurant in central Athens",
     desktopImage: "/projects/shuk-athens-desktop.png",
     mobileImage: "/projects/shuk-athens-mobile.png",
+    mockupImage: "/projects/shuk-athens-mockup.png",
     url: "https://www.shukathens.com",
   },
   {
@@ -150,6 +151,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a boutique massage and wellness spa",
     desktopImage: "/projects/stone-massage-athens-desktop.png",
     mobileImage: "/projects/stone-massage-athens-mobile.png",
+    mockupImage: "/projects/stone-massage-athens-mockup.png",
     url: "https://stonemassageathens.com",
   },
   {
@@ -158,6 +160,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a psychologist and systemic therapist",
     desktopImage: "/projects/konstantinopoulou-kyparissia-desktop.png",
     mobileImage: "/projects/konstantinopoulou-kyparissia-mobile.png",
+    mockupImage: "/projects/konstantinopoulou-kyparissia-mockup.png",
     url: "https://konstantinopoulou-kyparissia.vercel.app/en",
   },
   {
@@ -166,6 +169,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a car service and repair garage",
     desktopImage: "/projects/antoniadis-autoservice-desktop.png",
     mobileImage: "/projects/antoniadis-autoservice-mobile.png",
+    mockupImage: "/projects/antoniadis-autoservice-mockup.png",
     url: "https://www.antoniadis-autoservice.gr",
   },
   {
@@ -174,6 +178,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a butcher shop in Ilioupoli",
     desktopImage: "/projects/vous-kreopoleio-desktop.png",
     mobileImage: "/projects/vous-kreopoleio-mobile.png",
+    mockupImage: "/projects/vous-kreopoleio-mockup.png",
     url: "https://vous-kreopoleio.vercel.app",
   },
   {
@@ -182,6 +187,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a fish market and grill",
     desktopImage: "/projects/sifnios-ixthiopolio-desktop.png",
     mobileImage: "/projects/sifnios-ixthiopolio-mobile.png",
+    mockupImage: "/projects/sifnios-ixthiopolio-mockup.png",
     url: "https://sifnios-ixthiopolio.vercel.app",
   },
   {
@@ -190,6 +196,7 @@ export const PROJECTS: Project[] = [
     description: "Website for a defense procurement and consulting firm",
     desktopImage: "/projects/moiss-defense-systems-desktop.png",
     mobileImage: "/projects/moiss-defense-systems-mobile.png",
+    mockupImage: "/projects/moiss-defense-systems-mockup.png",
     url: "https://moiss-defense-systems.vercel.app",
   },
 ];
