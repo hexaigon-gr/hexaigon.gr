@@ -34,6 +34,8 @@ MASK_DILATE_PX = 5
 ERODE_PX = 5
 # The warped screenshot must extend past the dilated alpha so it never samples black.
 QUAD_PAD = 14
+# Safe-area inset for the phone screenshot (fraction of its width, per side).
+PHONE_EDGE_PAD_FRAC = 0.04
 # Scenes are upscaled to this width so screenshots keep enough pixels to stay
 # legible when zoomed (background is soft/bokeh, so the upscale is invisible).
 TARGET_SCENE_WIDTH = 2752
@@ -100,6 +102,8 @@ def screen_alpha(mask, quad):
     Non-green pixels inside the quad (notch, Dynamic Island, corner bezel)
     stay at alpha 0 and keep the original scene — that's the whole trick.
     The quad region clips away nearby reflection greens outside the screen.
+    Used for the LAPTOP: preserves the MacBook notch, and its corner rounding
+    is too slight to cut UI.
     """
     region = np.zeros_like(mask)
     cv2.fillConvexPoly(region, expand_quad(quad, 2).astype(np.int32), 255)
@@ -109,6 +113,19 @@ def screen_alpha(mask, quad):
     )
     alpha = cv2.dilate(alpha, kernel)
     return cv2.GaussianBlur(alpha, (3, 3), 0)  # anti-aliased edge
+
+
+def pad_replicate(img, frac):
+    """Pad an image on all sides by `frac` of its width, replicating edge pixels.
+
+    Used on the PHONE screenshot before warping: the UI moves inward so the
+    screen's rounded corners never clip real content (header text, icons),
+    while the replicated edge pixels fill the corner areas with the header's
+    own background color — exactly how content sits inside a real phone's
+    safe area. Content shrinks by only ~7%, visually negligible.
+    """
+    pad = max(2, int(round(img.shape[1] * frac)))
+    return cv2.copyMakeBorder(img, pad, pad, pad, pad, cv2.BORDER_REPLICATE)
 
 
 def warp_onto(scene, screenshot, quad, alpha):
@@ -172,7 +189,9 @@ def composite(scene_path, desktop_path, mobile_path, out_path):
     alpha_phone = screen_alpha(mask, phone_quad)
 
     out = warp_onto(scene, desktop, laptop_quad, alpha_laptop)
-    out = warp_onto(out, mobile, phone_quad, alpha_phone)
+    # Phone: content wraps inside the rounded screen; the safe-area padding
+    # keeps the header/footer clear of the corner rounding.
+    out = warp_onto(out, pad_replicate(mobile, PHONE_EDGE_PAD_FRAC), phone_quad, alpha_phone)
 
     screens = cv2.bitwise_or(
         (alpha_laptop >= 128).astype(np.uint8) * 255,

@@ -27,30 +27,17 @@ import numpy as np
 from imageio_ffmpeg import get_ffmpeg_exe
 
 from composite import (
+    PHONE_EDGE_PAD_FRAC,
     QUAD_PAD,
     TARGET_SCENE_WIDTH,
     despill,
     expand_quad,
     find_green_quads,
     green_mask,
+    pad_replicate,
     screen_alpha,
     warp_onto,
 )
-
-
-def solid_screen_alpha(mask, quad):
-    """Full-RECTANGLE alpha for the phone: paint the whole screen, corner to corner.
-
-    screen_alpha() keeps non-green pixels transparent (notch, Dynamic Island) AND
-    the green's rounded corners curve inward — so UI in the extreme corners (the
-    site's top-right hamburger menu) and along the top (header) gets chopped. Here
-    we simply fill the entire screen quad, so every pixel of the screenshot shows,
-    including the notch strip and all four corners. Corners read slightly squared,
-    but nothing in the UI is ever cut off.
-    """
-    solid = np.zeros_like(mask)
-    cv2.fillConvexPoly(solid, expand_quad(quad, 2).astype(np.int32), 255)
-    return cv2.GaussianBlur(solid, (3, 3), 0)  # anti-aliased edge
 
 
 def quad_dst_size(dst):
@@ -104,12 +91,12 @@ def main():
     mask = green_mask(scene)
     laptop_quad, phone_quad = find_green_quads(scene)  # largest first
     alpha_laptop = screen_alpha(mask, laptop_quad)
-    # Phone: fill over the notch/Dynamic Island so the site header isn't chopped.
-    alpha_phone = solid_screen_alpha(mask, phone_quad)
+    alpha_phone = screen_alpha(mask, phone_quad)
 
     # Static base: phone image + despill baked in once. The laptop's green stays
     # under its (protected) alpha and is overwritten by the video every frame.
-    base = warp_onto(scene, phone_img, phone_quad, alpha_phone)
+    # Safe-area padding keeps the phone UI clear of the rounded corners.
+    base = warp_onto(scene, pad_replicate(phone_img, PHONE_EDGE_PAD_FRAC), phone_quad, alpha_phone)
     screens = cv2.bitwise_or(
         (alpha_laptop >= 128).astype(np.uint8) * 255,
         (alpha_phone >= 128).astype(np.uint8) * 255,
