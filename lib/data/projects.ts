@@ -179,7 +179,7 @@ export const PROJECTS: Project[] = [
     desktopImage: "/projects/vous-kreopoleio-desktop.png",
     mobileImage: "/projects/vous-kreopoleio-mobile.png",
     mockupImage: "/projects/vous-kreopoleio-mockup.png",
-    url: "https://vous-kreopoleio.vercel.app",
+    url: "https://www.vous-kreopoleio.gr/el",
   },
   {
     slug: "sifnios-ixthiopolio",
