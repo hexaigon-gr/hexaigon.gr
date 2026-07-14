@@ -1,16 +1,24 @@
 import fs from "fs/promises";
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import path from "path";
 import Markdown from "react-markdown";
 
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { buildAlternates } from "@/lib/seo";
 import { BasePageProps } from "@/types/page-props";
 
-export async function generateMetadata({ params }: BasePageProps) {
+export async function generateMetadata({ params }: BasePageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "PrivacyPolicy" });
-  return { title: t("title") };
+  const tMeta = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("title"),
+    description: tMeta("privacyDescription"),
+    alternates: buildAlternates(locale, "/privacy-policy"),
+  };
 }
 
 const PrivacyPolicyPage = async ({ params }: BasePageProps) => {

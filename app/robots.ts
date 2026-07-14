@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { SITE_URL } from "@/lib/seo";
+
 const robots = (): MetadataRoute.Robots => ({
   rules: [
     {
@@ -8,7 +10,8 @@ const robots = (): MetadataRoute.Robots => ({
       disallow: ["/api/"],
     },
   ],
-  sitemap: "https://hexaigon.gr/sitemap.xml",
+  sitemap: `${SITE_URL}/sitemap.xml`,
+  host: SITE_URL,
 });
 
 export default robots;

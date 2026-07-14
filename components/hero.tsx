@@ -3,7 +3,9 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+
+import { PROJECTS } from "@/lib/data/projects";
 
 const ROTATION_KEYS = ["rotating1", "rotating2", "rotating3"] as const;
 const TYPING_SPEED = 80;
@@ -12,19 +14,34 @@ const PAUSE_DURATION = 2000;
 const COUNTER_DURATION = 2000;
 
 const STATS = [
-  { key: "projects", value: 10, suffix: "+" },
+  { key: "projects", value: PROJECTS.length, suffix: "+" },
+  // TODO: confirm exact figures
   { key: "clients", value: 15, suffix: "+" },
   { key: "automations", value: 2, suffix: "+" },
 ] as const;
 
+/**
+ * useLayoutEffect warns when it runs during SSR, and we only need it on the client.
+ */
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 const AnimatedCounter = ({ target, suffix }: { target: number; suffix: string }) => {
-  const [count, setCount] = useState(0);
+  // Seeded with the real figure so the server-rendered HTML carries it. Crawlers
+  // that do not execute JS (and most AI crawlers do not) would otherwise read "0+".
+  const [count, setCount] = useState(target);
   const hasAnimated = useRef(false);
   const ref = useRef<HTMLSpanElement>(null);
 
+  // Rewind before the browser paints, so the count-up still starts from zero
+  // without the final figure flashing first.
+  useIsomorphicLayoutEffect(() => {
+    if (typeof IntersectionObserver !== "undefined") setCount(0);
+  }, []);
+
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

@@ -5,10 +5,12 @@ import { Commissioner, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { hasLocale } from "next-intl";
-import { getMessages,setRequestLocale } from "next-intl/server";
+import { getMessages,getTranslations,setRequestLocale } from "next-intl/server";
 
+import { LocalBusinessSchema } from "@/components/local-business-schema";
 import { Providers } from "@/components/providers";
 import { routing } from "@/lib/i18n/routing";
+import { localeUrl,SITE_URL } from "@/lib/seo";
 import { BaseLayoutProps } from "@/types/page-props";
 
 const META_PIXEL_ID = "1961881335206282";
@@ -23,78 +25,65 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "greek"],
 });
 
-const SITE_URL =
-  process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "https://hexaigon.gr";
+/**
+ * Brand-level metadata only. Anything locale- or route-specific (title,
+ * description, canonical, hreflang) is set by each page's generateMetadata —
+ * a canonical declared here would be inherited by every route and point them
+ * all at the same URL.
+ */
+export const generateMetadata = async ({
+  params,
+}: BaseLayoutProps): Promise<Metadata> => {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: "hexAIgon — AI-Powered Web Development & Automation | Greece",
-    template: "%s | hexAIgon",
-  },
-  description:
-    "We build custom websites, AI automation workflows, and software solutions that help businesses across Greece grow faster. Next.js, React, OpenAI, Anthropic.",
-  keywords: [
-    "web development Greece",
-    "AI automation",
-    "custom software",
-    "Next.js development",
-    "React developer Greece",
-    "κατασκευή ιστοσελίδων",
-    "αυτοματισμοί AI",
-    "web developer Ελλάδα",
-    "hexAIgon",
-  ],
-  authors: [{ name: "hexAIgon", url: SITE_URL }],
-  creator: "hexAIgon",
-  publisher: "hexAIgon",
-  formatDetection: { telephone: false },
-  openGraph: {
-    type: "website",
-    locale: "en_GR",
-    alternateLocale: "el_GR",
-    url: SITE_URL,
-    siteName: "hexAIgon",
-    title: "hexAIgon — AI-Powered Web Development & Automation",
-    description:
-      "Custom websites, AI automation, and software solutions for businesses across Greece.",
-    images: [
-      {
-        url: "/seo-image.png",
-        width: 1200,
-        height: 630,
-        alt: "hexAIgon — AI-Powered Web Development & Automation",
-        type: "image/png",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "hexAIgon — AI-Powered Web Development & Automation",
-    description:
-      "Custom websites, AI automation, and software solutions for businesses across Greece.",
-    images: ["/seo-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: t("title"),
+      template: "%s | hexAIgon",
+    },
+    description: t("description"),
+    authors: [{ name: "hexAIgon", url: SITE_URL }],
+    creator: "hexAIgon",
+    publisher: "hexAIgon",
+    formatDetection: { telephone: false },
+    openGraph: {
+      type: "website",
+      locale: locale === "en" ? "en_GR" : "el_GR",
+      alternateLocale: locale === "en" ? "el_GR" : "en_GR",
+      url: localeUrl(locale),
+      siteName: "hexAIgon",
+      title: t("title"),
+      description: t("description"),
+      images: [
+        {
+          url: "/seo-image.png",
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+          type: "image/png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: ["/seo-image.png"],
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      en: `${SITE_URL}/en`,
-      el: `${SITE_URL}/el`,
-    },
-  },
+  };
 };
 
 export const generateStaticParams = () => {
@@ -143,6 +132,7 @@ const LocaleLayout = async ({ children, params }: BaseLayoutProps) => {
             `,
           }}
         />
+        <LocalBusinessSchema locale={locale} />
         <Providers messages={messages} locale={locale}>
           {children}
         </Providers>

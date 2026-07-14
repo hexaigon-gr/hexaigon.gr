@@ -1,7 +1,12 @@
 {
   "Metadata": {
     "title": "hexAIgon — AI-Powered Web Development & Automation | Greece",
-    "description": "We build custom websites, AI automation workflows, and software solutions that help Greek businesses grow faster. Next.js, React, and cutting-edge AI tools."
+    "description": "We build custom websites, AI automation workflows, and software solutions that help Greek businesses grow faster. Next.js, React, and cutting-edge AI tools.",
+    "projectsTitle": "Work & Portfolio",
+    "projectsDescription": "Explore the websites, eshops and web apps hexAIgon has built for businesses across Greece.",
+    "privacyDescription": "hexAIgon privacy policy: how we collect, use and protect your data.",
+    "businessCardTitle": "Digital Business Card",
+    "businessCardDescription": "The hexAIgon digital business card — contact details and services."
   },
   "Nav": {
     "services": "Services",
@@ -13,10 +18,10 @@
     "getStarted": "Get Started"
   },
   "Hero": {
-    "line1": "We build",
-    "rotating1": "websites that work.",
-    "rotating2": "businesses that scale.",
-    "rotating3": "software that thinks.",
+    "line1": "We build websites that",
+    "rotating1": "work.",
+    "rotating2": "sell.",
+    "rotating3": "stand out.",
     "subtitle": "AI-powered web development & automation for businesses across Greece.",
     "cta": "Get Started",
     "ctaSecondary": "Portfolio",

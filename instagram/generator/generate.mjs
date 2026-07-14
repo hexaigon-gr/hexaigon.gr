@@ -125,7 +125,11 @@ const page = await browser.newPage({ viewport: { width: W, height: H }, deviceSc
 for (const p of POSTS) {
   if (!fs.existsSync(path.join(PROJECTS_DIR, p.desktop))) { console.log("skip (no desktop):", p.slug); continue; }
   await page.setContent(template(p), { waitUntil: "networkidle" });
-  try { await page.evaluate(() => document.fonts.ready); } catch {}
+  try {
+    await page.evaluate(() => document.fonts.ready);
+  } catch {
+    // Font Loading API unavailable — the waitForTimeout below still covers us.
+  }
   await page.waitForTimeout(250);
   await page.locator(".post").screenshot({ path: path.join(OUT_DIR, `${p.slug}.png`) });
   console.log("✓", p.slug, "→", p.domain);

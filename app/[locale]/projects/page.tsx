@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Footer } from "@/components/footer";
@@ -5,7 +6,29 @@ import { Navbar } from "@/components/navbar";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
 import { PROJECTS } from "@/lib/data/projects";
+import { buildAlternates } from "@/lib/seo";
 import { BasePageProps } from "@/types/page-props";
+
+export const generateMetadata = async ({
+  params,
+}: BasePageProps): Promise<Metadata> => {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("projectsTitle"),
+    description: t("projectsDescription"),
+    alternates: buildAlternates(locale, "/projects"),
+    openGraph: {
+      title: t("projectsTitle"),
+      description: t("projectsDescription"),
+    },
+    twitter: {
+      title: t("projectsTitle"),
+      description: t("projectsDescription"),
+    },
+  };
+};
 
 const ProjectsPage = async ({ params }: BasePageProps) => {
   const { locale } = await params;
