@@ -126,26 +126,24 @@ curl -X POST "https://graph.facebook.com/v25.0/YOUR_PAGE_ID/subscribed_apps" \
 
 Expected: `{"success": true}`. Verify with the same URL as a `GET`.
 
-### 6. App Review — required before real leads work
+### 6. Publish the app to Live
 
-This is the gate that matters, so be clear about it:
-
-> "You can't retrieve leads if your app is in Development mode. For testing purposes,
-> Development mode app users can access leads submitted by someone with a role in that same app."
+> "You can't retrieve leads if your app is in Development mode. ... Apps in Live mode continue
+> to have access to all leads."
 > — [Meta Lead Ads guide](https://developers.facebook.com/documentation/ads-commerce/marketing-api/guides/lead-ads)
 
-So in **Development** mode you can only pull leads *you* submitted yourself (via the testing
-tool or as an app admin/developer/tester). Leads from actual strangers clicking your ad are
-**not** retrievable until the app is **Live**.
+In **Development** mode you can only pull leads submitted by someone with a role on the app.
+Flip the app to **Live** in the App Dashboard and real leads become retrievable.
 
-To go Live:
+**App Review is not required for this setup.** Standard Access on `leads_retrieval` is enough
+because we read *our own* Page's leads with *our own* Page token, as an admin of both the app
+and the Page. The person filling in the form never grants anything.
 
-1. Submit App Review with `leads_retrieval` and `pages_manage_ads`. Reviewers expect a working
-   `leadgen` webhook subscription, so finish steps 1–5 first — a broken endpoint fails the review.
-2. Complete **Business Verification** for the Business portfolio.
-3. Flip the app to **Live** in the App Dashboard.
+Advanced Access via App Review is only needed to build a product where *other* businesses
+connect *their* Pages — a multi-tenant CRM. That is not this.
 
-Budget a few days for this. Until it's done, run the testing tool to confirm the plumbing works.
+Verified on the live app: token valid with `leads_retrieval`, both subscriptions active, and
+`GET /{form-id}/leads` returning real lead data.
 
 ---
 
