@@ -33,9 +33,19 @@ export const GET = async (request: NextRequest) => {
   const token = params.get("hub.verify_token");
   const challenge = params.get("hub.challenge");
 
-  // Plain GET with no hub params: handy "is this deployed?" probe.
+  // Plain GET with no hub params: "is this deployed and configured?" probe.
+  // Reports only whether each variable is present — never its value.
   if (!mode && !token && !challenge) {
-    return Response.json({ ok: true, service: "meta-lead-webhook" });
+    return Response.json({
+      ok: true,
+      service: "meta-lead-webhook",
+      configured: {
+        appSecret: Boolean(process.env.META_APP_SECRET),
+        verifyToken: Boolean(process.env.META_VERIFY_TOKEN),
+        pageToken: Boolean(process.env.META_PAGE_ACCESS_TOKEN),
+        discord: Boolean(process.env.DISCORD_LEADS_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL),
+      },
+    });
   }
 
   const verifyToken = process.env.META_VERIFY_TOKEN;
