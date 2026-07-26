@@ -4,7 +4,7 @@ const DISCORD_EMBED_FIELD_LIMIT = 25;
 const DISCORD_FIELD_VALUE_LIMIT = 1024;
 
 /** Answers people actually care about first; everything else keeps its form order. */
-const FIELD_PRIORITY = ["full_name", "first_name", "last_name", "email", "phone_number"];
+const FIELD_PRIORITY = ["full_name", "first_name", "last_name", "email", "phone_number", "phone"];
 
 const FIELD_ICONS: Record<string, string> = {
   full_name: "👤",
@@ -12,11 +12,13 @@ const FIELD_ICONS: Record<string, string> = {
   last_name: "👤",
   email: "📧",
   phone_number: "📞",
+  phone: "📞",
   company_name: "🏢",
   job_title: "💼",
   city: "📍",
   street_address: "📍",
   post_code: "📮",
+  inbox_url: "💬",
 };
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
