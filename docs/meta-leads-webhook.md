@@ -3,7 +3,7 @@
 Instant Discord notification the moment someone submits a Meta (Facebook/Instagram) lead form.
 No Zapier, no polling, no 12-hour notification delay — Meta pushes to us in real time.
 
-**Endpoint:** `POST|GET https://hexaigon.gr/api/webhooks/meta-leads`
+**Endpoint:** `POST|GET https://www.hexaigon.gr/api/webhooks/meta-leads`
 **Code:** [`app/api/webhooks/meta-leads/route.ts`](../app/api/webhooks/meta-leads/route.ts), helpers in [`lib/meta-leads/`](../lib/meta-leads/)
 
 ---
@@ -30,8 +30,8 @@ you still get an instant amber alert with the lead ID and a Leads Center link.
 ### 1. Meta app
 
 1. Go to [developers.facebook.com/apps](https://developers.facebook.com/apps) → **Create app** →
-   use case **Other** → type **Business**, and link it to the Business portfolio that owns the
-   hexaigon Page and ad account.
+   type **Business**, and link it to the Business portfolio that owns the hexaigon Page and
+   ad account.
 
    Use a **dedicated app** for this (e.g. "Hexaigon Leads"). Don't reuse an unrelated app —
    App Review is judged per app against its stated purpose, and each app gets only one Page
@@ -80,12 +80,15 @@ Get the Discord webhook from **Server Settings → Integrations → Webhooks →
 
 App Dashboard → **Webhooks** → subscribe to the **Page** object → **Edit subscription**:
 
-- **Callback URL:** `https://hexaigon.gr/api/webhooks/meta-leads`
+- **Callback URL:** `https://www.hexaigon.gr/api/webhooks/meta-leads`
 - **Verify token:** the exact `META_VERIFY_TOKEN` value
 
 Click **Verify and save**. Meta sends a `GET` with `hub.challenge`; our handler echoes it back.
 Then subscribe to the **`leadgen`** field on that Page object.
 
+> ⚠️ Use the **`www.`** host. The apex `hexaigon.gr` answers with a `307` redirect to `www`,
+> and Meta's verifier does not follow redirects — registering the apex fails verification.
+>
 > The URL must be HTTPS with a real certificate — Vercel gives you this for free.
 > Self-signed certs are rejected.
 
