@@ -21,6 +21,6 @@ export const POSTS = [
   { slug: "konstantinopoulou-kyparissia", desktop: "konstantinopoulou-kyparissia-desktop.png", mobile: "konstantinopoulou-kyparissia-mobile.png", label: "Ψυχολόγος & συστημική θεραπεύτρια", domain: "konstantinopoulou-kyparissia.vercel.app" },
   { slug: "antoniadis-autoservice",    desktop: "antoniadis-autoservice-desktop.png",    mobile: "antoniadis-autoservice-mobile.png",    label: "Συνεργείο αυτοκινήτων (Nissan)", domain: "antoniadis-autoservice.gr" },
   { slug: "vous-kreopoleio",           desktop: "vous-kreopoleio-desktop.png",           mobile: "vous-kreopoleio-mobile.png",           label: "Κρεοπωλείο",                    domain: "vous-kreopoleio.gr" },
-  { slug: "sifnios-ixthiopolio",       desktop: "sifnios-ixthiopolio-desktop.png",       mobile: "sifnios-ixthiopolio-mobile.png",       label: "Ιχθυοπωλείο & ψάρια ψητά",      domain: "sifnios-ixthiopolio.vercel.app" },
+  { slug: "sifnios-ixthiopolio",       desktop: "sifnios-ixthiopolio-desktop.png",       mobile: "sifnios-ixthiopolio-mobile.png",       label: "Ιχθυοπωλείο & ψάρια ψητά",      domain: "sifnios.gr" },
   { slug: "moiss-defense-systems",     desktop: "moiss-defense-systems-desktop.png",     mobile: "moiss-defense-systems-mobile.png",     label: "Αμυντικά συστήματα & προμήθειες", domain: "moiss-defense-systems.vercel.app" },
 ];

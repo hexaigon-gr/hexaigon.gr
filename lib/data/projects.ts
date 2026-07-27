@@ -188,7 +188,7 @@ export const PROJECTS: Project[] = [
     desktopImage: "/projects/sifnios-ixthiopolio-desktop.png",
     mobileImage: "/projects/sifnios-ixthiopolio-mobile.png",
     mockupImage: "/projects/sifnios-ixthiopolio-mockup.png",
-    url: "https://sifnios-ixthiopolio.vercel.app",
+    url: "https://www.sifnios.gr",
   },
   {
     slug: "moiss-defense-systems",

@@ -25,8 +25,8 @@ const SITES = {
   "stone-massage-athens": "https://stonemassageathens.com",
   "konstantinopoulou-kyparissia": "https://konstantinopoulou-kyparissia.vercel.app/en",
   "antoniadis-autoservice": "https://www.antoniadis-autoservice.gr",
-  "vous-kreopoleio": "https://vous-kreopoleio.vercel.app",
-  "sifnios-ixthiopolio": "https://sifnios-ixthiopolio.vercel.app",
+  "vous-kreopoleio": "https://www.vous-kreopoleio.gr/el",
+  "sifnios-ixthiopolio": "https://www.sifnios.gr",
   "moiss-defense-systems": "https://moiss-defense-systems.vercel.app",
 };
 
