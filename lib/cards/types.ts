@@ -40,8 +40,18 @@ export interface Card {
    * on the page and written into the vCard as `NOTE`.
    */
   note?: string;
-  /** Local path under `public/`, e.g. "/cards/mitsos/photo.jpg", or any URL. */
+  /**
+   * Either a path under `public/cards/`, e.g. "/cards/mitsos/photo.jpg", or an
+   * absolute URL on another host.
+   *
+   * Local photos must live under `/cards/` specifically. That is the only
+   * directory the vCard builder will read from, because a wider path makes
+   * Vercel's file tracer bundle everything under it into the function. See
+   * `CARD_IMAGE_URL_PREFIX` in `lib/cards/vcard.ts`. A path outside `/cards/`
+   * still displays on the page but will not embed in the vCard.
+   */
   photoUrl?: string;
+  /** Any path or URL. Only displayed on the page, never used in the vCard. */
   companyLogoUrl?: string;
   socialLinks?: SocialLinks;
   /** Accent colour as a hex string, e.g. "#3b82f6". Drives the whole page. */

@@ -125,11 +125,19 @@ becoming a silent 404 in production.
   URI-only vCard would save a contact with no picture. Larger or unreachable
   photos fall back to the URI form, made absolute with `SITE_URL`, because a
   relative URI is useless once the file has left the browser.
-- A `photoUrl` starting with `/` is read off disk from `public/` at build time,
-  not fetched over HTTP. Fetching our own origin during the build would hit the
-  *currently deployed* site, so a photo added in the same commit would not exist
-  yet and the embed would silently fail until the following deploy. Paths are
-  confined to `public/`, so a `..` in the data file cannot read the build machine.
+- A `photoUrl` starting with `/` is read off disk at build time, not fetched over
+  HTTP. Fetching our own origin during the build would hit the *currently
+  deployed* site, so a photo added in the same commit would not exist yet and the
+  embed would silently fail until the following deploy.
+- **Local photos must live under `public/cards/`.** That is the only directory the
+  builder reads from. Vercel's file tracer cannot tell which file a dynamic
+  `readFile` will open, so it bundles everything under the deepest directory it
+  can resolve; pointing it at `public/` pulled in all 400+ MB of project
+  screenshots and failed the deploy on the function size limit. Scoped to
+  `public/cards/`, the traced function is about 1 MB. A photo outside `/cards/`
+  still shows on the page but will not embed in the vCard.
+- The vCard route is `force-static` with `dynamicParams: false`, so it has no
+  runtime handler at all. The disk read only ever happens during `next build`.
 
 ## Before writing the first NFC tag
 

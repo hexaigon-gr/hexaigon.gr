@@ -100,25 +100,41 @@ const PHOTO_TYPES_BY_EXTENSION: Record<string, string> = {
 };
 
 /**
- * Reads a photo stored under `public/`, e.g. "/cards/mitsos/photo.jpg".
+ * Directory every local card image must live in.
+ *
+ * Narrow on purpose, and not just for tidiness. Vercel's file tracer cannot tell
+ * which file a dynamic `readFile` will open, so it bundles everything under the
+ * deepest directory it can resolve. Pointing this at `public/` made it pull in
+ * all 400+ MB of project screenshots and the deploy failed on the function size
+ * limit. Scoped to `public/cards/`, the over-tracing is a few headshots.
+ */
+const CARD_IMAGE_URL_PREFIX = "/cards/";
+
+/**
+ * Reads a photo stored at `public/cards/<slug>/photo.jpg`.
  *
  * Deliberately a filesystem read rather than an HTTP request to our own origin.
  * The vCard is prerendered at build time, so fetching the URL would hit the
  * *currently deployed* site: a photo added in the same commit would not exist
- * yet and the embed would silently fail until the next deploy.
+ * yet and the embed would silently fail until the following deploy.
  */
 const readLocalPhoto = async (photoPath: string): Promise<InlinePhoto | null> => {
   try {
     const [cleanPath] = photoPath.split(/[?#]/);
+    if (!cleanPath.startsWith(CARD_IMAGE_URL_PREFIX)) return null;
+
     const extension = path.extname(cleanPath).toLowerCase();
     const type = PHOTO_TYPES_BY_EXTENSION[extension];
     if (!type) return null;
 
-    // Resolve inside public/ and confirm it stayed there, so a path with ".."
-    // in the data file cannot read arbitrary files off the build machine.
-    const publicDir = path.join(process.cwd(), "public");
-    const absolute = path.join(publicDir, cleanPath);
-    if (!absolute.startsWith(publicDir)) return null;
+    // Statically resolvable prefix, so the tracer expands only this directory.
+    const cardsDir = path.join(process.cwd(), "public", "cards");
+    const relative = cleanPath.slice(CARD_IMAGE_URL_PREFIX.length);
+    const absolute = path.join(cardsDir, relative);
+
+    // Confirm it stayed inside, so a ".." in the data file cannot read arbitrary
+    // files off the build machine.
+    if (!absolute.startsWith(cardsDir)) return null;
 
     const buffer = await readFile(absolute);
     if (buffer.length === 0 || buffer.length > MAX_INLINE_PHOTO_BYTES) return null;

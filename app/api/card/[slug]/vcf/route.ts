@@ -17,6 +17,23 @@ interface RouteContext {
 export const generateStaticParams = () => getAllCardSlugs().map((slug) => ({ slug }));
 
 /**
+ * Fully static, with no runtime fallback. Both settings are load-bearing, not
+ * tidiness:
+ *
+ * `buildVCard` reads photos from `public/` with `process.cwd()`. If this route
+ * can also run per request, Vercel's file tracer has to assume the handler might
+ * read anything under that path and bundles the whole directory into the
+ * function. `public/` here is 436 MB of project screenshots, which overran the
+ * function size limit and failed the deploy outright.
+ *
+ * Every card is known at build time, so there is nothing for a runtime handler
+ * to do. `dynamicParams: false` makes an unknown or deactivated slug 404 without
+ * invoking anything, which is the same outcome the handler produced anyway.
+ */
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+/**
  * Streams a vCard built from the card's entry in `lib/cards/data.ts`.
  *
  * Header choices, all of which decide whether the download actually works:
