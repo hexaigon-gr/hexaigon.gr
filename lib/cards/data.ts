@@ -62,14 +62,13 @@ export const CARDS: Card[] = [
     landline: "+30 210 646 4610",
     email: "nikzoukas@gmail.com",
     address: "Λεωφόρος Αλεξάνδρας 15, 11473 Αθήνα",
-    // Centred lockup on the standard dark card: the gold NGZ emblem as the hero,
-    // the gold "ZOUKAS LAW FIRM" wordmark under it, name/role/tagline typed below.
-    // Assets are derived from the client's gold-on-dark logo (see gen-zoukas.mjs).
+    // Navy + silver, from the client's ZOUKAS LAW FIRM logo. The silver wordmark
+    // is the centred hero (no emblem), name/role/tagline typed below.
     centered: true,
+    surface: "#0b1a34",
     companyLogoUrl: "/cards/nikolaos-zoukas/logo.png",
-    photoUrl: "/cards/nikolaos-zoukas/photo.jpg",
-    // Gold accent (buttons, QR, rings) to match the NGZ logo.
-    themeColor: "#e0b23a",
+    // Silver accent (buttons, QR, rings) on the navy surface.
+    themeColor: "#c3cad6",
     updatedAt: "2026-07-30",
   },
 ];

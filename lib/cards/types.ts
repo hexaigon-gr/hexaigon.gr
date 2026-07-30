@@ -67,6 +67,11 @@ export interface Card {
    */
   centered?: boolean;
   /**
+   * Base page colour, overriding the default near-black. A hex string, e.g.
+   * "#0b1a34" for a deep navy. Use to match the card to the client's palette.
+   */
+  surface?: string;
+  /**
    * Optional full-bleed background image behind the card. Bake the darkening/tint
    * into the image itself so the contact rows stay readable; the page also frosts
    * the contact panel when one is set. Usually paired with `centered`.

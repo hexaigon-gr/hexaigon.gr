@@ -120,21 +120,21 @@ const CardPage = async ({ params }: CardPageProps) => {
   const hasBackground = Boolean(card.backgroundImageUrl);
   const centered = Boolean(card.centered);
 
-  // Identity lines typed out on the centred layout, in warm/gold tones. The full
+  // Identity lines typed out on the centred layout, in silver tones. The full
   // text is server-rendered inside CardTypewriter, so this stays SEO- and AT-safe.
   const identityLines: TypewriterLine[] = [
     {
       text: card.fullName,
       as: "h1",
       className:
-        "font-display text-[2.75rem] leading-[0.95] font-normal tracking-[-0.02em] text-[#f2ead6]",
+        "font-display text-[2.75rem] leading-[0.95] font-normal tracking-[-0.02em] text-[#eef1f6]",
     },
   ];
   if (card.jobTitle) {
     identityLines.push({
       text: card.jobTitle,
       as: "p",
-      className: "mt-4 text-[15px] leading-snug text-[#cbb488]",
+      className: "mt-4 text-[18px] leading-snug text-[#b7c0cf]",
     });
   }
   if (card.company) {
@@ -149,13 +149,13 @@ const CardPage = async ({ params }: CardPageProps) => {
     identityLines.push({
       text: card.note,
       as: "p",
-      className: "mt-2 text-[13px] leading-relaxed text-[#98926f]",
+      className: "mt-2.5 text-[15px] leading-relaxed text-[#8a93a4]",
     });
   }
 
   return (
     <main
-      style={theme.cssVars}
+      style={card.surface ? { ...theme.cssVars, backgroundColor: card.surface } : theme.cssVars}
       className="card-grain relative min-h-dvh overflow-hidden bg-[#07070b] text-white"
     >
       {card.backgroundImageUrl && (
@@ -182,13 +182,20 @@ const CardPage = async ({ params }: CardPageProps) => {
             above the wordmark; otherwise the standard logo-left row. */}
         {centered ? (
           <header className="card-rise flex flex-col items-center gap-5 pt-2">
-            <CardPortrait photoUrl={card.photoUrl} fullName={card.fullName} size={92} />
+            {/* Emblem above the wordmark only when the card has one. */}
+            {card.photoUrl && (
+              <CardPortrait photoUrl={card.photoUrl} fullName={card.fullName} size={92} />
+            )}
             {card.companyLogoUrl && (
               // eslint-disable-next-line @next/next/no-img-element -- client-supplied host, see CardPortrait
               <img
                 src={card.companyLogoUrl}
                 alt={card.company ?? card.fullName}
-                className="h-9 w-auto max-w-[15rem] object-contain"
+                className={
+                  card.photoUrl
+                    ? "h-9 w-auto max-w-[15rem] object-contain"
+                    : "mt-2 h-auto w-[74%] max-w-[19rem] object-contain"
+                }
                 loading="eager"
               />
             )}
