@@ -52,6 +52,26 @@ export const CARDS: Card[] = [
     themeColor: "#3b82f6",
     updatedAt: "2026-07-30",
   },
+  {
+    slug: "nikolaos-zoukas",
+    fullName: "Νικόλαος Ζούκας",
+    jobTitle: "Δικηγόρος",
+    // Their wall tagline. Remove if the card should stay strictly name + role.
+    note: "Building Bridges Through Collaborative Law",
+    phone: "+30 698 055 5050",
+    landline: "+30 210 646 4610",
+    email: "nikzoukas@gmail.com",
+    address: "Λεωφόρος Αλεξάνδρας 15, 11473 Αθήνα",
+    // Centred lockup on the standard dark card: the gold NGZ emblem as the hero,
+    // the gold "ZOUKAS LAW FIRM" wordmark under it, name/role/tagline typed below.
+    // Assets are derived from the client's gold-on-dark logo (see gen-zoukas.mjs).
+    centered: true,
+    companyLogoUrl: "/cards/nikolaos-zoukas/logo.png",
+    photoUrl: "/cards/nikolaos-zoukas/photo.jpg",
+    // Gold accent (buttons, QR, rings) to match the NGZ logo.
+    themeColor: "#e0b23a",
+    updatedAt: "2026-07-30",
+  },
 ];
 
 /** Lowercase alphanumeric words joined by single hyphens. */

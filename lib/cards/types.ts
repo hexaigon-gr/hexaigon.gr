@@ -25,7 +25,14 @@ export interface Card {
   fullName: string;
   jobTitle?: string;
   company?: string;
+  /** Primary number, treated as a mobile: dialable row, `TEL;TYPE=CELL` in the vCard. */
   phone?: string;
+  /**
+   * Optional second number for a fixed office line. Renders its own contact row
+   * and is written as `TEL;TYPE=WORK,VOICE`, so a saved contact keeps mobile and
+   * office apart instead of collapsing them into one.
+   */
+  landline?: string;
   email?: string;
   /** With or without a scheme. `https://` is added where one is missing. */
   website?: string;
@@ -53,6 +60,18 @@ export interface Card {
   photoUrl?: string;
   /** Any path or URL. Only displayed on the page, never used in the vCard. */
   companyLogoUrl?: string;
+  /**
+   * Centred lockup instead of the default logo-left row: the emblem sits centred
+   * as the hero with the wordmark under it, and the name/role/tagline are typed
+   * out (CardTypewriter) centred below. Independent of `backgroundImageUrl`.
+   */
+  centered?: boolean;
+  /**
+   * Optional full-bleed background image behind the card. Bake the darkening/tint
+   * into the image itself so the contact rows stay readable; the page also frosts
+   * the contact panel when one is set. Usually paired with `centered`.
+   */
+  backgroundImageUrl?: string;
   socialLinks?: SocialLinks;
   /** Accent colour as a hex string, e.g. "#3b82f6". Drives the whole page. */
   themeColor: string;

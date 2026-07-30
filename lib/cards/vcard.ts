@@ -251,6 +251,12 @@ export const buildVCard = async ({
     if (phone) lines.push(`TEL;TYPE=CELL,VOICE:${escapeValue(phone)}`);
   }
 
+  if (card.landline) {
+    const landline = normalizePhone(card.landline);
+    // WORK,VOICE lands under the office/work label, kept distinct from the cell.
+    if (landline) lines.push(`TEL;TYPE=WORK,VOICE:${escapeValue(landline)}`);
+  }
+
   if (card.email) lines.push(`EMAIL;TYPE=INTERNET,PREF:${escapeValue(card.email.trim())}`);
 
   if (card.address) {

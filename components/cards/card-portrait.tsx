@@ -1,6 +1,8 @@
 interface CardPortraitProps {
   photoUrl?: string;
   fullName: string;
+  /** Rendered size in px. Defaults to 124. */
+  size?: number;
 }
 
 /** Initials for the fallback, at most two letters. */
@@ -25,8 +27,8 @@ const initialsOf = (fullName: string) =>
  * any host, so `next/image` would need every one of those hosts allowlisted in
  * `remotePatterns` and would hard-fail the page on an unlisted domain.
  */
-export const CardPortrait = ({ photoUrl, fullName }: CardPortraitProps) => (
-  <div className="card-portrait-glow relative size-[124px]">
+export const CardPortrait = ({ photoUrl, fullName, size = 124 }: CardPortraitProps) => (
+  <div className="card-portrait-glow relative" style={{ width: size, height: size }}>
     {/* Accent rim: a slightly larger hexagon behind, showing as a hairline.
         Deliberately the only shape behind the portrait. An offset "depth"
         hexagon was tried here and read as a rendering artifact at this size. */}
