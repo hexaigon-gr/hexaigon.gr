@@ -55,7 +55,7 @@ export const CARDS: Card[] = [
   {
     slug: "nikolaos-zoukas",
     fullName: "Νικόλαος Ζούκας",
-    jobTitle: "Δικηγόρος",
+    jobTitle: "Δικηγόρος / Lawyer",
     // Their wall tagline. Remove if the card should stay strictly name + role.
     note: "Building Bridges Through Collaborative Law",
     phone: "+30 698 055 5050",
