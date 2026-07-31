@@ -71,6 +71,23 @@ export const CARDS: Card[] = [
     themeColor: "#c3cad6",
     updatedAt: "2026-07-30",
   },
+  {
+    // Nikolaos's brother, same firm — identical navy + silver treatment, only
+    // the name, phone and email differ (office line and address are shared).
+    slug: "georgios-zoukas",
+    fullName: "Γεώργιος Ζούκας",
+    jobTitle: "Δικηγόρος / Lawyer",
+    note: "Building Bridges Through Collaborative Law",
+    phone: "+30 695 100 2100",
+    landline: "+30 210 646 4610",
+    email: "giozoukas@gmail.com",
+    address: "Λεωφόρος Αλεξάνδρας 15, 11473 Αθήνα",
+    centered: true,
+    surface: "#0b1a34",
+    companyLogoUrl: "/cards/georgios-zoukas/logo.png",
+    themeColor: "#c3cad6",
+    updatedAt: "2026-07-31",
+  },
 ];
 
 /** Lowercase alphanumeric words joined by single hyphens. */
