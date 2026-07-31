@@ -88,6 +88,26 @@ export const CARDS: Card[] = [
     themeColor: "#c3cad6",
     updatedAt: "2026-07-31",
   },
+  {
+    // Barbershop — gold-on-black, from the CUT THE CRAP BARBERIA logo.
+    slug: "cut-the-crap",
+    fullName: "Παναγιώτης Αρβανίτης",
+    // TODO: confirm the exact role — "Barber" assumed.
+    jobTitle: "Barber",
+    phone: "+30 698 506 5680",
+    landline: "+30 210 995 7363",
+    address: "Λεωφόρος Κυπρίων Ηρώων 3, Ηλιούπολη",
+    reviewsUrl:
+      "https://www.google.com/maps/search/?api=1&query=Cut+The+Crap+Barberia+Ilioupoli",
+    socialLinks: {
+      instagram: "https://www.instagram.com/cut.the.crap25",
+    },
+    centered: true,
+    surface: "#0a0a0a",
+    companyLogoUrl: "/cards/cut-the-crap/logo.png",
+    themeColor: "#c9a86e",
+    updatedAt: "2026-07-31",
+  },
 ];
 
 /** Lowercase alphanumeric words joined by single hyphens. */

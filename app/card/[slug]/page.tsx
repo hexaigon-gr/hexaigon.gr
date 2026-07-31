@@ -6,6 +6,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  Star,
   UserRoundPlus,
 } from "lucide-react";
 import type { Metadata, Viewport } from "next";
@@ -114,7 +115,7 @@ const CardPage = async ({ params }: CardPageProps) => {
     : null;
 
   const hasContactRows = Boolean(
-    card.phone || card.landline || card.email || website || mapsUrl,
+    card.phone || card.landline || card.email || website || mapsUrl || card.reviewsUrl,
   );
 
   const hasBackground = Boolean(card.backgroundImageUrl);
@@ -338,6 +339,15 @@ const CardPage = async ({ params }: CardPageProps) => {
                   label="Address"
                   value={card.address}
                   icon={<MapPin className="size-[18px]" aria-hidden />}
+                  external
+                />
+              )}
+              {card.reviewsUrl && (
+                <CardContactRow
+                  href={card.reviewsUrl}
+                  label="Reviews"
+                  value="Google"
+                  icon={<Star className="size-[18px]" aria-hidden />}
                   external
                 />
               )}

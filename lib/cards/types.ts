@@ -43,6 +43,11 @@ export interface Card {
    */
   address?: string;
   /**
+   * Link to the business's reviews (usually a Google Maps place). Renders a
+   * "Reviews" row with a star. Display-only, not written into the vCard.
+   */
+  reviewsUrl?: string;
+  /**
    * One short line, e.g. "Web, apps and AI automation". Shown under the company
    * on the page and written into the vCard as `NOTE`.
    */
