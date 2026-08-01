@@ -43,6 +43,11 @@ export interface Card {
    */
   address?: string;
   /**
+   * Online-booking link (e.g. a Treatwell/Fresha page). Renders a "Book" row
+   * with a calendar, placed first so it reads as the primary action. Display-only.
+   */
+  bookingUrl?: string;
+  /**
    * Link to the business's reviews (usually a Google Maps place). Renders a
    * "Reviews" row with a star. Display-only, not written into the vCard.
    */

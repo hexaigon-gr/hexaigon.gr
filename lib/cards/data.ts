@@ -97,6 +97,7 @@ export const CARDS: Card[] = [
     phone: "+30 698 506 5680",
     landline: "+30 210 995 7363",
     address: "Λεωφόρος Κυπρίων Ηρώων 3, Ηλιούπολη",
+    bookingUrl: "https://widget.treatwell.gr/place/493802/menu",
     reviewsUrl:
       "https://www.google.com/maps/search/?api=1&query=Cut+The+Crap+Barberia+Ilioupoli",
     socialLinks: {

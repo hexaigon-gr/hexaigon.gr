@@ -1,4 +1,5 @@
 import {
+  CalendarCheck,
   Facebook,
   Globe,
   Instagram,
@@ -115,7 +116,13 @@ const CardPage = async ({ params }: CardPageProps) => {
     : null;
 
   const hasContactRows = Boolean(
-    card.phone || card.landline || card.email || website || mapsUrl || card.reviewsUrl,
+    card.bookingUrl ||
+      card.phone ||
+      card.landline ||
+      card.email ||
+      website ||
+      mapsUrl ||
+      card.reviewsUrl,
   );
 
   const hasBackground = Boolean(card.backgroundImageUrl);
@@ -300,6 +307,15 @@ const CardPage = async ({ params }: CardPageProps) => {
             style={{ animationDelay: "380ms" }}
           >
             <div className="divide-y divide-white/6">
+              {card.bookingUrl && (
+                <CardContactRow
+                  href={card.bookingUrl}
+                  label="Book"
+                  value="Κλείσε ραντεβού"
+                  icon={<CalendarCheck className="size-[18px]" aria-hidden />}
+                  external
+                />
+              )}
               {card.phone && (
                 <CardContactRow
                   href={`tel:${card.phone.replace(/\s+/g, "")}`}
