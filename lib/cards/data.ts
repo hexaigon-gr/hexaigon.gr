@@ -42,6 +42,7 @@ export const CARDS: Card[] = [
     // photoUrl to show it in a hexagon above the wordmark.
     // photoUrl: "/cards/dimitris-christakis/photo.jpg",
     centered: true,
+    surface: "#0a1124",
     companyLogoUrl: "/cards/dimitris-christakis/logo.png",
     socialLinks: {
       instagram: "https://www.instagram.com/hexaigon.gr",
