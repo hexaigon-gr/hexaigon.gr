@@ -36,13 +36,13 @@ export const CARDS: Card[] = [
     phone: "+30 698 388 2720",
     email: "hexaigonsoftwaresolutions@gmail.com",
     website: "https://www.hexaigon.gr",
-    // Drop a square headshot at public/cards/dimitris-christakis/photo.jpg and
-    // uncomment. Until then the portrait shows the initials, which reads fine.
+    // Same centred + typed treatment as the client cards: the hexAIgon wordmark
+    // as the hero, name/role/company typed below, on the default dark surface.
+    // Drop a square headshot at public/cards/dimitris-christakis/photo.jpg and set
+    // photoUrl to show it in a hexagon above the wordmark.
     // photoUrl: "/cards/dimitris-christakis/photo.jpg",
-    //
-    // The hexAIgon mark from app/icon.svg, already served at /icon.svg. Its blue
-    // is the brand blue, so it only suits cards using the default accent.
-    companyLogoUrl: "/icon.svg",
+    centered: true,
+    companyLogoUrl: "/cards/dimitris-christakis/logo.png",
     socialLinks: {
       instagram: "https://www.instagram.com/hexaigon.gr",
       linkedin: "https://www.linkedin.com/company/hexaigon",
@@ -50,7 +50,7 @@ export const CARDS: Card[] = [
       // than pointed at a guess.
     },
     themeColor: "#3b82f6",
-    updatedAt: "2026-07-30",
+    updatedAt: "2026-07-31",
   },
   {
     slug: "nikolaos-zoukas",
