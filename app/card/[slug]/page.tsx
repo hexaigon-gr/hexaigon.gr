@@ -116,13 +116,7 @@ const CardPage = async ({ params }: CardPageProps) => {
     : null;
 
   const hasContactRows = Boolean(
-    card.bookingUrl ||
-      card.phone ||
-      card.landline ||
-      card.email ||
-      website ||
-      mapsUrl ||
-      card.reviewsUrl,
+    card.phone || card.landline || card.email || website || mapsUrl || card.reviewsUrl,
   );
 
   const hasBackground = Boolean(card.backgroundImageUrl);
@@ -307,15 +301,6 @@ const CardPage = async ({ params }: CardPageProps) => {
             style={{ animationDelay: "380ms" }}
           >
             <div className="divide-y divide-white/6">
-              {card.bookingUrl && (
-                <CardContactRow
-                  href={card.bookingUrl}
-                  label="Book"
-                  value="Κλείσε ραντεβού"
-                  icon={<CalendarCheck className="size-[18px]" aria-hidden />}
-                  external
-                />
-              )}
               {card.phone && (
                 <CardContactRow
                   href={`tel:${card.phone.replace(/\s+/g, "")}`}
@@ -371,8 +356,8 @@ const CardPage = async ({ params }: CardPageProps) => {
           </section>
         )}
 
-        {/* Socials. */}
-        {socials.length > 0 && (
+        {/* Socials, plus the booking link as an icon alongside them. */}
+        {(socials.length > 0 || card.bookingUrl) && (
           <section className="card-rise mt-8" style={{ animationDelay: "440ms" }}>
             <h2 className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/30">
               Elsewhere
@@ -390,6 +375,17 @@ const CardPage = async ({ params }: CardPageProps) => {
                   <Icon className="size-5" aria-hidden />
                 </a>
               ))}
+              {card.bookingUrl && (
+                <a
+                  href={card.bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Book online"
+                  className="card-tint card-edge card-accent-fg flex size-12 items-center justify-center rounded-xl border transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  <CalendarCheck className="size-5" aria-hidden />
+                </a>
+              )}
             </div>
           </section>
         )}
