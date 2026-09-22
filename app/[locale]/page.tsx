@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { ContactSection } from "@/components/contact-section";
+import { FaqSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { HowWeWorkSection } from "@/components/how-we-work-section";
+import { JsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import { PaymentsBanner } from "@/components/payments-banner";
 import { PortfolioSection } from "@/components/portfolio-section";
@@ -12,6 +14,7 @@ import { ScrollToTop } from "@/components/scroll-to-top";
 import { ServicesSection } from "@/components/services-section";
 import { TechStackSection } from "@/components/tech-stack-section";
 import { WhyUsSection } from "@/components/why-us-section";
+import { websiteSchema } from "@/lib/schema";
 import { buildAlternates } from "@/lib/seo";
 import { BasePageProps } from "@/types/page-props";
 
@@ -54,6 +57,7 @@ const Home = async ({ params }: BasePageProps) => {
   return (
     <>
       <Navbar />
+      <JsonLd data={websiteSchema(locale)} />
       <main>
         <Hero />
         <ServicesSection />
@@ -62,6 +66,7 @@ const Home = async ({ params }: BasePageProps) => {
         <PortfolioSection />
         <HowWeWorkSection />
         <TechStackSection />
+        <FaqSection />
         <ContactSection />
       </main>
       <Footer />

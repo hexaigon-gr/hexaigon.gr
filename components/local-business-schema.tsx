@@ -14,6 +14,7 @@ export const LocalBusinessSchema = ({ locale }: { locale: string }) => {
   const data = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#organization`,
     name: "hexAIgon",
     url: localeUrl(locale),
     logo: `${SITE_URL}/seo-image.png`,

@@ -4,16 +4,15 @@ import { getTranslations } from "next-intl/server";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHeader } from "@/components/section-header";
-import { PROJECTS } from "@/lib/data/projects";
+import { SHOWCASE_PROJECTS } from "@/lib/data/projects";
 import { Link } from "@/lib/i18n/navigation";
 
 const FEATURED_COUNT = 7;
 
 export const PortfolioSection = async () => {
   const t = await getTranslations("Portfolio");
-  const withMockups = PROJECTS.filter((p) => p.mockupImage);
-  const featured = withMockups.slice(0, FEATURED_COUNT);
-  const remaining = withMockups.length - featured.length;
+  const featured = SHOWCASE_PROJECTS.slice(0, FEATURED_COUNT);
+  const remaining = SHOWCASE_PROJECTS.length - featured.length;
 
   return (
     <section id="portfolio" className="py-24 px-4">

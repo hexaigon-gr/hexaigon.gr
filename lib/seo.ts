@@ -37,3 +37,25 @@ export const buildAlternates = (
     },
   };
 };
+
+/**
+ * Alternates for a route whose slug differs per locale (the service pages).
+ * Without this each localized slug would look like a separate page competing
+ * with its own translation; hreflang is what tells Google they are one page.
+ */
+export const buildAlternatesFor = (
+  locale: string,
+  paths: Record<string, string>
+): NonNullable<Metadata["alternates"]> => {
+  const el = localeUrl("el", paths.el);
+  const en = localeUrl("en", paths.en);
+
+  return {
+    canonical: locale === "en" ? en : el,
+    languages: {
+      "el-GR": el,
+      en,
+      "x-default": el,
+    },
+  };
+};

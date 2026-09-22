@@ -17,6 +17,9 @@ export const generateMetadata = async ({
     title: t("businessCardTitle"),
     description: t("businessCardDescription"),
     alternates: buildAlternates(locale, "/business-card"),
+    // Our own contact card: thin, near-duplicate of the contact section and of
+    // /card/dimitris-christakis. Indexing it only splits the brand query.
+    robots: { index: false, follow: true },
   };
 };
 

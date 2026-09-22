@@ -43,7 +43,7 @@ export const ContactSection = () => {
             {/* Pitch column */}
             <Reveal className="lg:col-span-2">
               <p className="eyebrow mb-8">
-                <span className="text-primary">05</span>
+                <span className="text-primary">06</span>
                 <span className="mx-2 text-white/20">/</span>
                 {t("eyebrow")}
               </p>

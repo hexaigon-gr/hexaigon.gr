@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import { ProjectCard } from "@/components/project-card";
 import { Reveal } from "@/components/reveal";
-import { PROJECTS } from "@/lib/data/projects";
+import { SHOWCASE_PROJECTS } from "@/lib/data/projects";
+import { itemListSchema } from "@/lib/schema";
 import { buildAlternates } from "@/lib/seo";
 import { BasePageProps } from "@/types/page-props";
 
@@ -35,14 +38,30 @@ const ProjectsPage = async ({ params }: BasePageProps) => {
   setRequestLocale(locale);
 
   const t = await getTranslations("Portfolio");
-  // Only projects whose screenshots have been captured (mockup generated)
-  const projects = PROJECTS.filter((p) => p.mockupImage);
+  const tService = await getTranslations("ServicePage");
+  const projects = SHOWCASE_PROJECTS;
 
   return (
     <>
       <Navbar />
+      <JsonLd
+        data={itemListSchema(
+          locale,
+          projects.map((project) => ({
+            name: project.title,
+            path: `/projects/${project.slug}`,
+          }))
+        )}
+      />
       <main className="pt-32 pb-24 px-4">
         <div className="container mx-auto max-w-6xl">
+          <Breadcrumbs
+            locale={locale}
+            trail={[
+              { name: tService("home"), path: "" },
+              { name: t("caseStudies"), path: "/projects" },
+            ]}
+          />
           <div className="border-t border-white/10 pt-6 mb-14">
             <p className="eyebrow mb-8">
               <span className="text-primary">{String(projects.length).padStart(2, "0")}</span>

@@ -54,7 +54,20 @@
       "description": "Tailored software solutions for your unique business needs. From internal tools to customer-facing platforms."
     },
     "eyebrow": "Services",
-    "description": "Six ways we help your business ship faster — from marketing sites to custom AI systems."
+    "description": "Nine ways to help your business — from websites and e-shops to custom AI systems.",
+    "viewService": "Learn more",
+    "eshop": {
+      "title": "E-shop",
+      "description": "Online stores with Stripe payments, automated Greek myDATA invoicing and a checkout that does not lose orders."
+    },
+    "support": {
+      "title": "Maintenance & Support",
+      "description": "Security updates, backups, monitoring and content changes — with a human who answers."
+    },
+    "digitalCards": {
+      "title": "NFC Digital Cards",
+      "description": "A business card that opens with a tap and saves to contacts with one button."
+    }
   },
   "WhyUs": {
     "title": "Why Us",
@@ -161,7 +174,9 @@
     "visit": "Visit Site",
     "allProjectsTitle": "All Projects",
     "eyebrow": "Selected work",
-    "description": "Real projects for real businesses across Greece — live and in production."
+    "description": "Real projects for real businesses across Greece — live and in production.",
+    "viewCase": "View case study",
+    "caseStudies": "Case studies"
   },
   "TechStack": {
     "title": "Powered By"
@@ -199,6 +214,58 @@
     "comingSoon": "Coming Soon",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "eshop": "E-shop",
+    "support": "Maintenance & Support",
+    "digitalCards": "NFC Digital Cards"
+  },
+  "Faq": {
+    "eyebrow": "FAQ",
+    "title": "What clients ask before we start",
+    "description": "The questions everyone has before handing over a project — answered plainly.",
+    "q1": "How much does a website cost?",
+    "a1": "It depends on size and features. A brochure site for a local shop is not priced like an e-shop with payments or a booking platform. You get a written, fixed-price quote with a clear scope before any work begins, with no hidden extras.",
+    "q2": "How long will it take?",
+    "a2": "A brochure site is usually ready within a few weeks of us having copy and photos. An e-shop or an application takes longer. The timeline is agreed together with the quote.",
+    "q3": "Do you build e-shops too?",
+    "a3": "Yes. We build online stores with Stripe payments, automated Greek myDATA invoicing and order management. We have also built an entire ordering platform, Orderoo, used by local shops with no commission to a third party.",
+    "q4": "Will people find me on Google?",
+    "a4": "Every site ships with technical SEO, structured data and Google Search Console connected, so it indexes correctly from day one. Competitive phrases also need ongoing content work — that is what the SEO & AEO service covers.",
+    "q5": "Do you only work in Athens?",
+    "a5": "We are based in Ilioupoli and meet easily across Attica, but we work with businesses all over Greece. Remote works well — several of our clients have never met us in person.",
+    "q6": "What happens after launch?",
+    "a6": "We do not disappear. The code and the domain are yours, and you can continue on monthly maintenance for updates, backups and content changes. It is not compulsory — the site runs without us."
+  },
+  "ServicePage": {
+    "eyebrow": "Service",
+    "home": "Home",
+    "hubTitle": "Services",
+    "hubMetaTitle": "Services — Websites, E-shops & Applications",
+    "hubMetaDescription": "Website, e-shop and app development, AI automation, SEO and advertising for businesses in Athens and across Greece.",
+    "hubEyebrow": "What we do",
+    "hubDescription": "Nine services covering the whole route: from a first website to the system that runs your business.",
+    "includes": "What's included",
+    "faqTitle": "Frequently asked questions",
+    "relatedProjects": "Related work",
+    "otherServices": "Other services",
+    "ctaTitle": "Let's talk about your project",
+    "ctaDescription": "Tell us what you need and you'll have a written, fixed-price quote within 24 hours.",
+    "cta": "Get a free quote",
+    "ctaSecondary": "See the work"
+  },
+  "CaseStudy": {
+    "eyebrow": "Case study",
+    "sector": "Sector",
+    "location": "Location",
+    "services": "Services",
+    "visit": "Visit the site",
+    "offline": "This site is temporarily offline.",
+    "whatWeBuilt": "What we built",
+    "relatedServices": "Related services",
+    "moreProjects": "More work",
+    "ctaTitle": "Want something like this for your business?",
+    "ctaDescription": "Send us two lines about what you need and we'll reply within 24 hours.",
+    "cta": "Get a free quote",
+    "lead": "{service} for a {category}"
   }
 }

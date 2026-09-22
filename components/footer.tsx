@@ -1,30 +1,9 @@
-import {
-  AppWindow,
-  Bot,
-  Code,
-  Github,
-  Globe,
-  Hexagon,
-  Instagram,
-  Linkedin,
-  Mail,
-  Megaphone,
-  Newspaper,
-  Search,
-} from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { Github, Hexagon, Instagram, Layers, Linkedin, Mail, Newspaper } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { SocialIcon } from "@/components/social-icon";
+import { servicePath,SERVICES } from "@/lib/data/services";
 import { Link } from "@/lib/i18n/navigation";
-
-const SERVICE_LINKS = [
-  { key: "websites", icon: Globe },
-  { key: "webApps", icon: AppWindow },
-  { key: "automations", icon: Bot },
-  { key: "ads", icon: Megaphone },
-  { key: "seoAeo", icon: Search },
-  { key: "customSoftware", icon: Code },
-] as const;
 
 const SOCIAL_LINKS = [
   {
@@ -52,6 +31,7 @@ const LEGAL_LINK_CLASS =
 
 export const Footer = async () => {
   const t = await getTranslations("Footer");
+  const locale = await getLocale();
 
   return (
     <footer className="relative border-t border-white/10 pt-16 px-4 overflow-hidden">
@@ -86,12 +66,20 @@ export const Footer = async () => {
           <div>
             <p className="eyebrow mb-5">{t("services")}</p>
             <div className="space-y-3">
-              {SERVICE_LINKS.map(({ key, icon: Icon }) => (
-                <a key={key} href="#services" className={LINK_CLASS}>
-                  <Icon className="h-3.5 w-3.5" />
-                  {t(key)}
-                </a>
-              ))}
+              {SERVICES.map((service) => {
+                const Icon = service.icon;
+
+                return (
+                  <Link
+                    key={service.key}
+                    href={servicePath(service, locale)}
+                    className={LINK_CLASS}
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    {t(service.key as "websites")}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -99,6 +87,10 @@ export const Footer = async () => {
           <div>
             <p className="eyebrow mb-5">{t("company")}</p>
             <div className="space-y-3">
+              <Link href="/services" className={LINK_CLASS}>
+                <Layers className="h-3.5 w-3.5" />
+                {t("services")}
+              </Link>
               <a href="#contact" className={LINK_CLASS}>
                 <Mail className="h-3.5 w-3.5" />
                 {t("contact")}
